@@ -1,0 +1,39 @@
+{ config, pkgs, ... }:
+
+{
+  # Networking
+  networking = {
+    networkmanager.enable = true;
+    firewall.enable = true;       # Enable a basic firewall
+  };
+
+  # Hardware
+  hardware.bluetooth.enable = true; # Enable Bluetooth support
+
+  # Services
+  services = {
+    openssh.enable = true;          # Enable OpenSSH for remote access
+    timesyncd.enable = true;        # Enable systemd-timesyncd for time synchronization
+    printing.enable = true;         # Enable CUPS for printing support
+    flatpak.enable = true;          # Enable Flatpak support
+
+    # Display Manager
+    xserver.displayManager.sddm = {
+      enable = true;
+      wayland = true; # Use Wayland with SDDM
+    };
+
+    # Polkit
+    polkit = {
+      enable = true;
+      extraConfig = ''
+        [Configuration]
+        AdminIdentities=unix-group:wheel
+      '';
+      agent = {
+        enable = true;
+        package = pkgs.gnome-polkit; # Use GNOME Polkit agent
+      };
+    };
+  };
+}
