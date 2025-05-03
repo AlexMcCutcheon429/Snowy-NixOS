@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -25,17 +25,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  kernelModules = ["tcp_bbr"];
-  kernel.sysctl = {
-    "net.ipv4.tcp_congestion_control" = "bbr";
-    "net.core.default_qdisc" = "fq";
-    "net.core.wmem_max" = 1073741824;
-    "net.core.rmem_max" = 1073741824;
-    "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
-    "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
-    };
-
-  time.timeZone = "America/Chicago";
+time.timeZone = "America/Chicago";
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -45,5 +35,5 @@
   };
 
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "24.11";
 }

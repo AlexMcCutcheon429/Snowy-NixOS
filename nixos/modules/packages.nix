@@ -18,7 +18,7 @@
     wl-clipboard
     xfce.thunar
     xfce.thunar-volman
-    xdg-desktop-portal
+    xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
     xdg-user-dirs
   ];

@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+
+let 
+    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+
 in
 {
   imports = [
     (import "${home-manager}/nixos")
   ];
-
+  home-manager.backupFileExtension = "true";
   home-manager.users.alexander = {
-    home.stateVersion = "25.05"; # Adjust to match your NixOS version
+    home.stateVersion = "24.11"; # Adjust to match your NixOS version
     home.packages = with pkgs; [
       alacritty
       audacity
@@ -16,7 +18,6 @@ in
       discord
       dunst
       firefox
-      fuse-common
       gh
       git
       gnugrep
@@ -31,7 +32,7 @@ in
       plex-desktop
       prismlauncher
       protonup-qt
-      qt5ct
+      libsForQt5.qt5ct
       qt6ct
       rofi-wayland
       slurp
@@ -48,7 +49,7 @@ in
       zoxide
 
       # Coding and Development Dependencies
-      dotnetCorePackages.sdk_8
+      dotnetCorePackages.dotnet_8.sdk
       dotnetCorePackages.dotnet_8.aspnetcore
       dotnetCorePackages.dotnet_8.runtime
       gnumake
@@ -56,32 +57,15 @@ in
       ninja
     ];
     programs.bash.enable = true;
-  };
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    # x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
-  };
-
-  gtk = {
-    enable = true;
-
-  theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
+    wayland.windowManager.hyprland = {
+     enable = true;
+     settings = {
+     "$mod" = "SUPER";
+     bind = [
+     "$mod, B, exec, firefox"
+     "$mod, RETURN, exec, alacritty"
+    ];
     };
-
-  iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-
-  font = {
-      name = "Sans";
-      size = 11;
     };
   };
 }

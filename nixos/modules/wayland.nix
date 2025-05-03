@@ -2,10 +2,7 @@
 
 {
   services.xserver.enable = false; # Disable Xorg
-  services.wayland.enable = true;  # Enable Wayland
-
-  # Enable Hyprland as the Wayland compositor
-  services.wayland.windowManager.hyprland.enable = true;
+#  services.wayland.enable = true;  # Enable Wayland
 
   # Optional: Set environment variables for Wayland
   environment.variables = {

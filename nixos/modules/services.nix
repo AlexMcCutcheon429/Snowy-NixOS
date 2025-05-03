@@ -15,25 +15,29 @@
     openssh.enable = true;          # Enable OpenSSH for remote access
     timesyncd.enable = true;        # Enable systemd-timesyncd for time synchronization
     printing.enable = true;         # Enable CUPS for printing support
-    flatpak.enable = true;          # Enable Flatpak support
+   # flatpak.enable = true;
 
     # Display Manager
-    xserver.displayManager.sddm = {
-      enable = true;
-      wayland = true; # Use Wayland with SDDM
-    };
+    displayManager.sddm.wayland.enable = true;
 
     # Polkit
-    polkit = {
-      enable = true;
-      extraConfig = ''
-        [Configuration]
-        AdminIdentities=unix-group:wheel
-      '';
-      agent = {
-        enable = true;
-        package = pkgs.gnome-polkit; # Use GNOME Polkit agent
-      };
-    };
+#    polkit = {
+ #     enable = true;
+  #    extraConfig = ''
+   #     [Configuration]
+   #     AdminIdentities=unix-group:wheel
+   #   '';
+   #   agent = {
+   #     enable = true;
+   #     package = pkgs.gnome-polkit; # Use GNOME Polkit agent
+   #   };
+   # };
   };
+#  xdg.portal = {
+#  enable = true;
+#  extraPortals = ["xdg-desktop-portal-gtk"];
+#  config.common = {
+#  default = ["gtk"];
+#};
+#};
 }
